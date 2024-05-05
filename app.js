@@ -19,6 +19,7 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 var routes = require('./routes/index');
 routes(app);
 
