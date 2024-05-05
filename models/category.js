@@ -1,19 +1,29 @@
-const sql = require('../db');
+const { Model, DataTypes } = require('sequelize');
 
-var Category = function(category) {
-    this.category_name = category.category_name;
-    this.category_description = category.category_description;
-}
+const sequelize = require('../config/connection.js');
 
-Category.create = (newCategory, result) => {
-    sql.query("INSERT INTO category SET ?", newCategory, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
+class category extends Model {}
 
-        console.log("created category: ", { id: res.insertId, ...newCategory });
-        result(null, { id: res.insertId, ...newCategory });
-    });
-}
+Category.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    category_name: {
+      type: DataTypes.STRING,
+    },
+    // define columns
+  },
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'category',
+  }
+);
+
+module.exports = category;

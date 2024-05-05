@@ -1,6 +1,5 @@
-const category = require('../controllers/category.controller.js');
+const router = require('express').Router();
+const apiRoutes = require('./api');
 
-module.exports = function(app) {
-
-    app.get('/', category.Main);
-}
+router.use('/api', apiRoutes);
+module.exports = router;
